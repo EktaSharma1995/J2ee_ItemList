@@ -5,6 +5,7 @@
  */
 package com.assignmentItem;
 
+import com.assignmentItem.ItemDetails;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -21,77 +22,47 @@ import javax.servlet.http.HttpServletResponse;
 public class InsertItems extends HttpServlet {
         private static final long serialVersionUID = 1L;
 
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet InsertItems</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet InsertItems at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             /* TODO output your page here. You may use following sample code. */
             
-            String itemNumber = request.getParameter("itemnumber");
-            
             ItemDetails items = new ItemDetails();
+
+            String itemNumber = request.getParameter("itemnumber");
             items.setItemNumber(itemNumber);
+
+            int quantity = Integer.valueOf(request.getParameter("quantity"));
+            items.setQuantity(quantity);
+
+            double priceEach = Double.valueOf(request.getParameter("pe"));
+            items.setPriceEach(priceEach);
+
+            String firstName = request.getParameter("fname");
+            items.setFirstName(firstName);
+
+            String lastName = request.getParameter("lname");
+            items.setLastName(lastName);
+
+            String middleInitial = request.getParameter("mname");
+            items.setMiddleInitial(middleInitial);
+
+            String shippingAddress = request.getParameter("sa");
+            items.setShippingAddress(shippingAddress);
+  
+            String paymentMode = request.getParameter("payment");
+            items.setPayment(paymentMode);
+
+            String creditCardNumber = request.getParameter("ccnumber");
+            items.setCreditCardNumber(creditCardNumber);
+
+            String repeatCreditCardNumber = request.getParameter("repeat");
+            items.setRepeatCreditCardNumnber(repeatCreditCardNumber);
             
-            String[] itemsArray = request.getParameterValues("payment");
-            
-            for(int i=0; i<itemsArray.length;i++){
-                out.println("<li>" + itemsArray[i]);
-            }
-            
-            items.setPayment(itemsArray);
             RequestDispatcher dispatcher=request.getRequestDispatcher("/Response.jsp");
 
-            request.setAttribute("sd",subjects);
+            request.setAttribute("id",items);
             dispatcher.forward(request, response);
         }   catch (ServletException e) {
             e.printStackTrace();
@@ -100,7 +71,6 @@ public class InsertItems extends HttpServlet {
         }   catch(Exception e){
             e.printStackTrace();
         }   
-        processRequest(request, response);
     }
 
     /**

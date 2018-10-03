@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package com.assignmentItem;
+import java.io.Serializable;
+
 
 /**
  *
@@ -11,6 +13,7 @@ package com.assignmentItem;
  */
 public class ItemDetails 
 {
+    private static final long serialVersionUID = 1L;
     private String itemNumber;
     private int quantity;
     private double priceEach;
@@ -18,7 +21,7 @@ public class ItemDetails
     private String lastName;
     private String middleInitial;
     private String shippingAddress;
-    private String[] payment;
+    private String payment;
     private String creditCardNumber;
     private String repeatCreditCardNumnber;
 
@@ -27,15 +30,16 @@ public class ItemDetails
         
     }
 
-    public ItemDetails(String itemNumber, int quantity, double priceEach, String firstName, String lastName, String shippingAddress, String creditCardNumber, String repeatCreditCardNumnber) {
-        this.itemNumber = itemNumber;
-        this.quantity = quantity;
-        this.priceEach = priceEach;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.shippingAddress = shippingAddress;
-        this.creditCardNumber = creditCardNumber;
-        this.repeatCreditCardNumnber = repeatCreditCardNumnber;
+    public ItemDetails(String itemNumber, int quantity, double priceEach, String firstName, String lastName, String shippingAddress, String payment, String creditCardNumber, String repeatCreditCardNumnber) {
+        setItemNumber(itemNumber);
+        setQuantity(quantity);
+        setPriceEach(priceEach);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setShippingAddress(shippingAddress);
+        setPayment(payment);
+        setCreditCardNumber(creditCardNumber);
+        setRepeatCreditCardNumnber(repeatCreditCardNumnber);
     }
     
     
@@ -171,7 +175,7 @@ public class ItemDetails
         return creditCardNumber;
     }
 
-    public void setCreditCardNumber(String CreditCardNumber) throws NullPointerException 
+    public void setCreditCardNumber(String creditCardNumber) throws NullPointerException 
     {
         if(creditCardNumber.equalsIgnoreCase(null) || creditCardNumber.equalsIgnoreCase("") )
         {
@@ -202,11 +206,11 @@ public class ItemDetails
         }
     }
 
-    public String[] getPayment() {
+    public String getPayment() {
         return payment;
     }
 
-    public void setPayment(String[] payment) {
+    public void setPayment(String payment) {
         this.payment = payment;
     }
     

@@ -11,8 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body border-style = "solid" border="1">
-        <form action="InsertDetails" method="post">
+    <body>
+        <form style = "background-color: oldlace; border: solid; padding: 1.5em; width: 35%" action="InsertItems" method="post">
 
             <h1>A Sample FORM using POST</h1>
 
@@ -41,7 +41,7 @@
             <br/> <br/>
 
             Shipping Address:
-            <textarea rows="10" cols="50" name="sd"></textarea>
+            <textarea rows="10" cols="50" name="sa"></textarea>
             <br/> <br/>
 
             Credit Card: 

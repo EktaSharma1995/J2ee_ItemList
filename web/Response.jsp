@@ -14,24 +14,70 @@
         <title>JSP Page</title>
     </head>
     <body>
-<%
+        <h1>Reading All Request Parameters</h1>
+        <%
        ItemDetails items=(ItemDetails)request.getAttribute("id");
         %>
     <table align="center" bgcolor="#FFFFCC" border="1" width="70%">
         <tr>
-            <td colspan="2" align="center"><%="Welcome "+items.getName()+" !!!!. Your selected subjects are:" %></td>
+            <td colspan="0.5" align="center" bgcolor="orange"><%="Parameter Name" %></td>
+            <td colspan="0.5" align="center" bgcolor="orange"><%="Parameter Value(s)" %></td>
+
         </tr>
-        <%
-            String[] subjectsArray = payment.getSubjects();
-            for(String s: subjectsArray){
-            
-        %>
+        
         <tr>
-            <td><%=s %> </td>
-            
+            <td colspan="0.5" align="center"><%="Address "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getShippingAddress()+ ""%></td>
+            <br/>
         </tr>
-        <%
-            }
-        %>
-    </table>    </body>
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Initial "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getMiddleInitial()+ ""%></td>
+            <br/>
+        </tr>    
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Price "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getPriceEach()+ ""%></td>
+            <br/>
+        </tr>    
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Card Number "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getCreditCardNumber()+ ""%></td>
+            <br/>
+        </tr>    
+            
+        <tr>
+            <td colspan="0.5" align="center"><%="First Name "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getFirstName()+ ""%></td>
+            <br/>
+        </tr> 
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Item Number "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getItemNumber()+ ""%></td>
+            <br/>
+        </tr>  
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Card Type "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getPayment()+ ""%></td>
+            <br/>
+        </tr>    
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Quantity "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getQuantity()+ ""%></td>
+            <br/>
+        </tr> 
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Last Name "%></td>
+            <td colspan="0.5" align="center"><%="" +items.getLastName()+ ""%></td>
+            <br/>
+        </tr>
+    </table>    
+    </body>
 </html>
