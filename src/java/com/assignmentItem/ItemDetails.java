@@ -71,7 +71,7 @@ public class ItemDetails
     public void setQuantity(int quantity) throws ArithmeticException
     {
         
-        if(quantity <= 0)
+        if(quantity <=0)
         {
            throw new ArithmeticException("Quantity can't be zero or negative ");
 
@@ -93,7 +93,7 @@ public class ItemDetails
     {
         if(priceEach <= 0) 
         {
-            throw new ArithmeticException("Quantity can't be zero or negative ");
+            throw new ArithmeticException("Price can't be zero or negative ");
 
         }
         
@@ -198,7 +198,7 @@ public class ItemDetails
     {
         if(repeatCreditCardNumnber.equalsIgnoreCase(null) || repeatCreditCardNumnber.equalsIgnoreCase("") )
         {
-            throw new NullPointerException("repeat Credit card number field can't be empty or null");
+            throw new NullPointerException("Confirm card number field can't be empty or null");
         }
         else 
         {

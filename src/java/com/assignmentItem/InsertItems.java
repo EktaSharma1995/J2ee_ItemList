@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import static java.lang.System.out;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,58 +20,116 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ektasharma
  */
+@WebServlet(urlPatterns = {"/exception.controller"})
+
 public class InsertItems extends HttpServlet {
-        private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             /* TODO output your page here. You may use following sample code. */
-            
+
             ItemDetails items = new ItemDetails();
+            boolean exceptionOccurred = false;
 
-            String itemNumber = request.getParameter("itemnumber");
-            items.setItemNumber(itemNumber);
+            try {
+                String itemNumber = request.getParameter("itemnumber");
+                items.setItemNumber(itemNumber);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionItemNumber", ex.getMessage());
+                exceptionOccurred = true;
+            }
 
-            int quantity = Integer.valueOf(request.getParameter("quantity"));
-            items.setQuantity(quantity);
+            try {
+                int quantity = Integer.valueOf(request.getParameter("quantity"));
+                items.setQuantity(quantity);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionQuantity", ex.getMessage());
+                exceptionOccurred = true;
+            }
 
-            double priceEach = Double.valueOf(request.getParameter("pe"));
-            items.setPriceEach(priceEach);
+            try {
+                double priceEach = Double.valueOf(request.getParameter("pe"));
+                items.setPriceEach(priceEach);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionPrice", ex.getMessage());
+                exceptionOccurred = true;
+            }
 
-            String firstName = request.getParameter("fname");
-            items.setFirstName(firstName);
+            try {
+                String firstName = request.getParameter("fname");
+                items.setFirstName(firstName);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionFirstName", ex.getMessage());
+                exceptionOccurred = true;
+            }
 
-            String lastName = request.getParameter("lname");
-            items.setLastName(lastName);
+            try {
+                String lastName = request.getParameter("lname");
+                items.setLastName(lastName);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionLastName", ex.getMessage());
+                exceptionOccurred = true;
+            }
 
             String middleInitial = request.getParameter("mname");
             items.setMiddleInitial(middleInitial);
 
-            String shippingAddress = request.getParameter("sa");
-            items.setShippingAddress(shippingAddress);
-  
-            String paymentMode = request.getParameter("payment");
-            items.setPayment(paymentMode);
+            try {
+                String shippingAddress = request.getParameter("sa");
+                items.setShippingAddress(shippingAddress);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionAddress", ex.getMessage());
+                exceptionOccurred = true;
+            }
 
-            String creditCardNumber = request.getParameter("ccnumber");
-            items.setCreditCardNumber(creditCardNumber);
+            try {
+                String paymentMode = request.getParameter("payment");
+                items.setPayment(paymentMode);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionPayment", ex.getMessage());
+                exceptionOccurred = true;
+            }
 
-            String repeatCreditCardNumber = request.getParameter("repeat");
-            items.setRepeatCreditCardNumnber(repeatCreditCardNumber);
-            
-            RequestDispatcher dispatcher=request.getRequestDispatcher("/Response.jsp");
+            try {
+                String creditCardNumber = request.getParameter("ccnumber");
+                items.setCreditCardNumber(creditCardNumber);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionCreditCard", ex.getMessage());
+                exceptionOccurred = true;
+            }
 
-            request.setAttribute("id",items);
-            dispatcher.forward(request, response);
-        }   catch (ServletException e) {
+            try {
+                String repeatCreditCardNumber = request.getParameter("repeat");
+                items.setRepeatCreditCardNumnber(repeatCreditCardNumber);
+            } catch (Exception ex) {
+                request.setAttribute("exceptionConfirmCard", ex.getMessage());
+                exceptionOccurred = true;
+            }
+
+            if (!items.getCreditCardNumber().equalsIgnoreCase(items.getRepeatCreditCardNumnber())) {
+                exceptionOccurred = true;
+                request.setAttribute("exceptionSameCardNumbers", "Card number do not match");
+            }
+
+            if (exceptionOccurred) {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ItemDetails.jsp");
+                requestDispatcher.forward(request, response);
+            } else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/Response.jsp");
+                request.setAttribute("id", items);
+                dispatcher.forward(request, response);
+            }
+
+        } catch (Exception e) {
+            request.setAttribute("unhandledException", e.getMessage());
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ItemDetails.jsp");
+            requestDispatcher.forward(request, response);
             e.printStackTrace();
-        }   catch (IOException e) {
-            e.printStackTrace();
-        }   catch(Exception e){
-            e.printStackTrace();
-        }   
+        }
     }
 
     /**
