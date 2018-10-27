@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id = "id" class = "com.assignmentItem.ItemDetailsBean" ></jsp:useBean>
 
 
 <!DOCTYPE html>
@@ -15,11 +16,14 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <%@ include file="myheader.jsp" %>
+        
         <form style = "background-color: oldlace; border: solid; padding: 1.5em; width: 50%" 
-              action="InsertItems"  method="post">
+              action="NewServlet"  method="post">
 
             <h1>A Sample FORM using POST</h1>
-            <h1><c:out value="${unhandledException}" /></h1>
+            <div><c:out value="${unhandledException}" /></div>
             
             <label>Item Number:</label>
             <input type="text" name="itemnumber" maxlength="20">
@@ -33,13 +37,15 @@
             <div style="color: red;">
                 <c:out value="${exceptionQuantity}" />
             </div>
+
             <br/>
             
             <label>Price Each:</label>
             <input type="number" name="pe" step="any">
             <div style="color: red;">
                 <c:out value="${exceptionPrice}" />
-            </div>    
+            </div> 
+
             <br/>
 
             <label>First name:</label>
@@ -47,13 +53,15 @@
             <div style="color: red;">
                 <c:out value="${exceptionFirstName}" />
             </div>
+
             <br/>
 
             <label>Last name:</label>
             <input type="text" name="lname" maxlength="20">
             <div style="color: red;">
                 <c:out value="${exceptionLastName}" />
-            </div>        
+            </div>     
+
             <br/> 
 
             <label>Middle Initial:</label>
@@ -62,7 +70,7 @@
 
             <label>Shipping Address:</label>
             <textarea rows="10" cols="50" name="sa"></textarea>
-            <div style="color: red;">
+           <div style="color: red;">
                 <c:out value="${exceptionAddress}" />    
             </div>    
             <br/>
@@ -87,10 +95,16 @@
             <input type="password" name="repeat" maxlength="16">
             <div style="color: red;">
                 <c:out value="${exceptionConfirmCard}" />
-            </div>    
+            </div>  
             <br/>
 
+            <div style="color: red;">
+                <c:out value="${exceptionCardDoNotMatch}" />
+            </div>  
             <input type="submit" value="Submit Order">
             </form>
+            
+            <%@ include file="myfooter.jsp" %>
+
     </body>
 </html>

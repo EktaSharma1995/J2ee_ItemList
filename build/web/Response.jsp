@@ -16,7 +16,16 @@
     <body>
         <h1>Reading All Request Parameters</h1>
         <%
-       ItemDetails items=(ItemDetails)request.getAttribute("id");
+            String itemNumber = request.getParameter("itemnumber");
+            int quantity = Integer.valueOf(request.getParameter("quantity"));
+            double priceEach = Double.valueOf(request.getParameter("pe"));
+            String firstName = request.getParameter("fname");
+            String lastName = request.getParameter("lname");
+            String middleInitial = request.getParameter("mname");
+            String shippingAddress = request.getParameter("sa");   
+            String paymentMode = request.getParameter("payment");
+            String creditCardNumber = request.getParameter("ccnumber");
+            String repeatCreditCardNumber = request.getParameter("repeat");
         %>
     <table align="center" bgcolor="#FFFFCC" border="1" width="70%">
         <tr>
@@ -26,58 +35,68 @@
         </tr>
         
         <tr>
-            <td colspan="0.5" align="center"><%="Address "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getShippingAddress()+ ""%></td>
+            <td colspan="0.5" align="center"><%="Item# "%></td>
+            <td colspan="0.5" align="center"><%=itemNumber%></td>
             <br/>
         </tr>
         
         <tr>
-            <td colspan="0.5" align="center"><%="Initial "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getMiddleInitial()+ ""%></td>
+            <td colspan="0.5" align="center"><%="Quantity "%></td>
+            <td colspan="0.5" align="center"><%=quantity%></td>
             <br/>
         </tr>    
         
         <tr>
-            <td colspan="0.5" align="center"><%="Price "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getPriceEach()+ ""%></td>
+            <td colspan="0.5" align="center"><%="Price Each "%></td>
+            <td colspan="0.5" align="center"><%=priceEach%></td>
             <br/>
         </tr>    
         
-        <tr>
-            <td colspan="0.5" align="center"><%="Card Number "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getCreditCardNumber()+ ""%></td>
-            <br/>
-        </tr>    
-            
+                    
         <tr>
             <td colspan="0.5" align="center"><%="First Name "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getFirstName()+ ""%></td>
-            <br/>
-        </tr> 
-        
-        <tr>
-            <td colspan="0.5" align="center"><%="Item Number "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getItemNumber()+ ""%></td>
-            <br/>
-        </tr>  
-        
-        <tr>
-            <td colspan="0.5" align="center"><%="Card Type "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getPayment()+ ""%></td>
-            <br/>
-        </tr>    
-        
-        <tr>
-            <td colspan="0.5" align="center"><%="Quantity "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getQuantity()+ ""%></td>
+            <td colspan="0.5" align="center"><%=firstName+ ""%></td>
             <br/>
         </tr> 
         
         <tr>
             <td colspan="0.5" align="center"><%="Last Name "%></td>
-            <td colspan="0.5" align="center"><%="" +items.getLastName()+ ""%></td>
+            <td colspan="0.5" align="center"><%=lastName%></td>
             <br/>
         </tr>
-    </table>    
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Middle Initial "%></td>
+            <td colspan="0.5" align="center"><%=middleInitial%></td>
+            <br/>
+        </tr>
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Shipping Address "%></td>
+            <td colspan="0.5" align="center"><%=shippingAddress%></td>
+            <br/>
+        </tr>
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Credit Card"%></td>
+            <td colspan="0.5" align="center"><%=paymentMode%></td>
+            <br/>
+        </tr>    
+
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Credit Card Number "%></td>
+            <td colspan="0.5" align="center"><%=creditCardNumber%></td>
+            <br/>
+        </tr>  
+        
+        <tr>
+            <td colspan="0.5" align="center"><%="Repeat Credit Card Number  "%></td>
+            <td colspan="0.5" align="center"><%=repeatCreditCardNumber%></td>
+            <br/>
+        </tr> 
+        
+        
+    </table>   
     </body>
 </html>
